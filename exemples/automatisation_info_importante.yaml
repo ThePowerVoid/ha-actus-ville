@@ -1,0 +1,26 @@
+# Automatisation : Paramètres > Automatisations > Créer > Modifier en YAML, puis coller.
+# Remplacer notify.mobile_app_mon_telephone par le service de ton téléphone.
+alias: "Lyon : info importante"
+description: >-
+  Notifie les publications de la ville qui contiennent un mot-clé important
+  (coupure d'eau, d'électricité…).
+mode: queued
+triggers:
+  - trigger: state
+    entity_id: event.lyon_nouvelle_publication
+conditions:
+  # from_state vide = entité restaurée au démarrage, pas un nouveau post.
+  - condition: template
+    value_template: >-
+      {{ trigger.from_state is not none
+         and trigger.to_state is not none
+         and trigger.from_state.state != 'unavailable'
+         and trigger.to_state.attributes.event_type == 'info_importante' }}
+actions:
+  - action: notify.mobile_app_mon_telephone
+    data:
+      title: "⚠️ Lyon : {{ trigger.to_state.attributes.keywords | join(', ') }}"
+      message: "{{ trigger.to_state.attributes.text | truncate(240) }}"
+      data:
+        url: "{{ trigger.to_state.attributes.link }}"
+        clickAction: "{{ trigger.to_state.attributes.link }}"

@@ -1,0 +1,20 @@
+# Carte Markdown : Tableau de bord > Modifier > Ajouter une carte > Manuel, puis coller.
+# Adapter l'entité si son identifiant diffère (Outils de développement > États).
+type: markdown
+title: Lyon
+content: |
+  {% set posts = state_attr('sensor.lyon_derniere_publication', 'posts') or [] %}
+  {% for p in posts %}
+  {% if p.important %}
+  <ha-alert alert-type="warning" title="Info importante : {{ p.keywords | join(', ') }}"></ha-alert>
+  {% endif %}
+  **{{ (as_timestamp(p.date) | timestamp_custom('%d/%m à %H:%M')) if p.date else 'Date inconnue' }}**{% if p.link %} · [Voir sur Facebook]({{ p.link }}){% endif %}
+
+  {{ p.text }}
+
+  {% if p.image %}![]({{ p.image }}){% endif %}
+
+  {% if not loop.last %}---{% endif %}
+  {% else %}
+  Aucune publication pour le moment.
+  {% endfor %}

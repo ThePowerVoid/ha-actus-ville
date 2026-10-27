@@ -1,0 +1,14 @@
+{
+  "entity": {
+    "sensor": {
+      "last_post": {
+        "default": "mdi:bullhorn"
+      }
+    },
+    "event": {
+      "new_post": {
+        "default": "mdi:message-alert"
+      }
+    }
+  }
+}

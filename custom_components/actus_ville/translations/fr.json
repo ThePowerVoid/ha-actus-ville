@@ -1,0 +1,61 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Ajouter les actus d'une ville",
+        "description": "Colle l'URL du flux RSS de la page Facebook de la ville (généré par rss.app, FetchRSS…) ou de tout autre flux RSS / Atom.",
+        "data": {
+          "name": "Nom",
+          "url": "URL du flux RSS"
+        },
+        "data_description": {
+          "name": "Nom de la ville, utilisé pour l'appareil et les entités.",
+          "url": "Exemple : https://rss.app/feeds/xxxxxxxx.xml"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Impossible de télécharger le flux. Vérifie l'URL.",
+      "invalid_feed": "L'URL ne renvoie pas un flux RSS ou Atom valide."
+    },
+    "abort": {
+      "already_configured": "Ce flux est déjà configuré."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options",
+        "data": {
+          "scan_interval": "Intervalle de mise à jour",
+          "max_posts": "Nombre de publications gardées",
+          "keywords": "Mots-clés « info importante »"
+        },
+        "data_description": {
+          "max_posts": "Nombre de publications dans l'attribut posts du capteur.",
+          "keywords": "Une publication qui contient l'un de ces mots déclenche l'événement « info importante ». Mot entier, sans tenir compte des majuscules ni des accents, pluriel en s ou x inclus."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "last_post": {
+        "name": "Dernière publication"
+      }
+    },
+    "event": {
+      "new_post": {
+        "name": "Nouvelle publication",
+        "state_attributes": {
+          "event_type": {
+            "state": {
+              "nouveau_post": "Nouvelle publication",
+              "info_importante": "Info importante"
+            }
+          }
+        }
+      }
+    }
+  }
+}

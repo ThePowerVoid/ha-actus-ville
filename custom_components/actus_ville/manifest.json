@@ -1,0 +1,12 @@
+{
+  "domain": "actus_ville",
+  "name": "Actus Ville",
+  "codeowners": ["@ThePowerVoid"],
+  "config_flow": true,
+  "documentation": "https://github.com/ThePowerVoid/ha-actus-ville",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/ThePowerVoid/ha-actus-ville/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}
